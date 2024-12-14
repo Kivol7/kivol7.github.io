@@ -11,7 +11,14 @@
             <p>ul. Farna 17/3</p>
             <p>41-506 Chorzów</p>
             <p>+48 792 867 357</p>
-            <p>biuro@noxxic.pl</p>
-            <p>b.jurczynski@noxxic.pl</p>
+            <script language="JavaScript" type="text/javascript">
+                var part1 = "biuro";
+                var part2 = Math.pow(2,6);
+                var part3 = String.fromCharCode(part2);
+                var part4 = "noxxic.pl";
+                var part5 = part1 + String.fromCharCode(part2) + part4;
+                document.write("Please email us at <a href=" + "mai" + "lto" + ":" 
+                + part5 + ">" + part1 + part3 + part4 + "</a>.");
+            </script>
     </body>
 </html>

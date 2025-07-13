@@ -20,7 +20,7 @@
     }
 
     h1 {
-      font-size: 100px;
+      font-size: 8vw; /* elastyczna czcionka */
       margin-top: 30px;
     }
 
@@ -28,6 +28,8 @@
       border: 1px solid #ccc;
       display: block;
       margin: 20px auto;
+      max-width: 100%; /* żeby nie wychodził poza ekran */
+      height: auto;
     }
 
     .pdf-container {
@@ -38,8 +40,23 @@
       margin-top: 30px;
     }
 
-    .mt-30{
+    .mt-30 {
       margin-top: 30px;
+    }
+
+    /* RESPONSYWNOŚĆ */
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 40px; /* mniejszy nagłówek na telefonie */
+      }
+      .pdf-container {
+        flex-direction: column; /* kolumnowo na małych ekranach */
+        gap: 10px;
+      }
+      canvas {
+        width: 90vw; /* szerokość canvasa dopasowana do ekranu */
+        height: auto;
+      }
     }
   </style>
 </head>
@@ -54,9 +71,27 @@
   <p>REGON: 540176761</p>
   <p>+48 792 867 357</p>
 
-  <p id="email1"></p>
+  <p>
+    <script language="JavaScript" type="text/javascript">
+      var part1 = "biuro";
+      var part2 = Math.pow(2, 6);
+      var part3 = String.fromCharCode(part2);
+      var part4 = "noxxic.pl";
+      var part5 = part1 + String.fromCharCode(part2) + part4;
+      document.write("<a href=" + "mai" + "lto" + ":" + part5 + ">" + part1 + part3 + part4 + "</a>");
+    </script>
+  </p>
 
-  <p id="email2"></p>
+  <p>
+    <script language="JavaScript" type="text/javascript">
+      var part1 = "b.jurczynski";
+      var part2 = Math.pow(2, 6);
+      var part3 = String.fromCharCode(part2);
+      var part4 = "noxxic.pl";
+      var part5 = part1 + String.fromCharCode(part2) + part4;
+      document.write("<a href=" + "mai" + "lto" + ":" + part5 + ">" + part1 + part3 + part4 + "</a>");
+    </script>
+  </p>
 
   <p class="mt-30">
     Instalacje technologiczne, cieplne i przemysłowe.
@@ -109,31 +144,17 @@
 
     renderPDF('referencje/list_referencyjny_elektr_-_B.Jurczyński.pdf', 'pdf-canvas-1');
     renderPDF('referencje/Referencje_Introl-sig_K.Szotek.pdf', 'pdf-canvas-2');
-
-    // Dynamiczne tworzenie linków mailto zamiast document.write
-    function createEmailLink(user, elementId) {
-      const at = String.fromCharCode(64);
-      const domain = "noxxic.pl";
-      const email = user + at + domain;
-      const a = document.createElement('a');
-      a.href = "mailto:" + email;
-      a.textContent = email;
-      document.getElementById(elementId).appendChild(a);
-    }
-
-    createEmailLink('biuro', 'email1');
-    createEmailLink('b.jurczynski', 'email2');
   </script>
 
   <p>
-    <a href="https://buycoffee.to/noxxic" target="_blank" rel="noopener noreferrer">
-      <img src="https://buycoffee.to/img/share-button-primary.png" loading="lazy" style="width: 351px; height: 92px" alt="Postaw mi kawę na buycoffee.to" />
+    <a href="https://buycoffee.to/noxxic" target="_blank">
+      <img src="https://buycoffee.to/img/share-button-primary.png" style="width: 351px; height: 92px" alt="Postaw mi kawę na buycoffee.to" />
     </a>
   </p>
 
   <p>
-    <a href="https://buycoffee.to/noxxic" target="_blank" rel="noopener noreferrer">
-      <img src="Kod_QR_buycoffee.png" loading="lazy" style="width: 210px; height: 210px" alt="Postaw mi kawę na buycoffee.to" />
+    <a href="https://buycoffee.to/noxxic" target="_blank">
+      <img src="Kod_QR_buycoffee.png" style="width: 210px; height: 210px" alt="Postaw mi kawę na buycoffee.to" />
     </a>
   </p>
 </body>

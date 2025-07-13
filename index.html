@@ -1,30 +1,27 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Bartosz Jurczyński Noxxic</title>
 
-  <link href="https://db.onlinewebfonts.com/c/2ab02c2937018ee7f2ccc346929ccf57?family=ArtifaktElement-Regular" rel="stylesheet">
+  <link href="https://db.onlinewebfonts.com/c/2ab02c2937018ee7f2ccc346929ccf57?family=ArtifaktElement-Regular" rel="stylesheet" />
 
   <style>
     html, body {
-    margin: 0;
-    min-height: 100%;
-    height: auto;
-    font-family: "ArtifaktElement-Regular", sans-serif;
-    text-align: center;
-    background-attachment: scroll;
-    }
-    
-    html {
+      margin: 0;
+      min-height: 100%;
+      font-family: "ArtifaktElement-Regular", sans-serif;
+      text-align: center;
       background: linear-gradient(135deg, #d3d3d3 60%, #808080);
+      background-attachment: scroll;
       background-repeat: no-repeat;
       background-size: cover;
     }
-    
-    body {
-      background: transparent;
+
+    h1 {
+      font-size: 100px;
+      margin-top: 30px;
     }
 
     canvas {
@@ -38,125 +35,110 @@
       gap: 20px;
       justify-content: center;
       align-items: flex-start;
+      margin-top: 30px;
     }
 
-    h1 {
-      font-size: 100px;
+    .mt-20 {
+      margin-top: 20px;
     }
   </style>
 </head>
-    
+
 <body>
-        <h1>noxx<text style="color: #83C937;">i</text>c</h1>
-            <p>Bartosz Jurczyński Noxxic</p>
-            <p>ul. Farna 17/3</p>
-            <p>41-506 Chorzów</p>
-            <p>NIP: 4980210405</p>
-            <p>REGON: 540176761</p>
-            <p>+48 792 867 357</p>
-            <p>
-                <script language="JavaScript" type="text/javascript">
-                var part1 = "biuro";
-                var part2 = Math.pow(2,6);
-                var part3 = String.fromCharCode(part2);
-                var part4 = "noxxic.pl";
-                var part5 = part1 + String.fromCharCode(part2) + part4;
-                document.write("<a href=" + "mai" + "lto" + ":" 
-                + part5 + ">" + part1 + part3 + part4 + "</a>");
-                </script>
-            </p>
+  <h1>noxx<span style="color: #83C937;">i</span>c</h1>
 
-            <p>
-                <script language="JavaScript" type="text/javascript">
-                    var part1 = "b.jurczynski";
-                    var part2 = Math.pow(2,6);
-                    var part3 = String.fromCharCode(part2);
-                    var part4 = "noxxic.pl";
-                    var part5 = part1 + String.fromCharCode(part2) + part4;
-                    document.write("<a href=" + "mai" + "lto" + ":" 
-                    + part5 + ">" + part1 + part3 + part4 + "</a>");
-                </script>
-            </p>
+  <p>Bartosz Jurczyński Noxxic</p>
+  <p>ul. Farna 17/3</p>
+  <p>41-506 Chorzów</p>
+  <p>NIP: 4980210405</p>
+  <p>REGON: 540176761</p>
+  <p>+48 792 867 357</p>
 
-            <p style="margin-top: 20px;">
-                Instalacje technologiczne, cieplne i przemysłowe.
-            </p>
+  <p>
+    <script language="JavaScript" type="text/javascript">
+      var part1 = "biuro";
+      var part2 = Math.pow(2, 6);
+      var part3 = String.fromCharCode(part2);
+      var part4 = "noxxic.pl";
+      var part5 = part1 + String.fromCharCode(part2) + part4;
+      document.write("<a href=" + "mai" + "lto" + ":" + part5 + ">" + part1 + part3 + part4 + "</a>");
+    </script>
+  </p>
 
-            <p>
-                Kogeneracja, silniki gazowe, turbiny parowe i gazowe, zakłady utylizacji odpadów, elektrociepłownie, pompownie.
-            </p>
-        
-            <p>
-                Doradztwo techniczne, stadia wykonalności, analizy opłacalności, projektowanie, szkolenia.
-                <br></br>
-            </p>
+  <p>
+    <script language="JavaScript" type="text/javascript">
+      var part1 = "b.jurczynski";
+      var part2 = Math.pow(2, 6);
+      var part3 = String.fromCharCode(part2);
+      var part4 = "noxxic.pl";
+      var part5 = part1 + String.fromCharCode(part2) + part4;
+      document.write("<a href=" + "mai" + "lto" + ":" + part5 + ">" + part1 + part3 + part4 + "</a>");
+    </script>
+  </p>
 
-            <p>
-                <span style="font-weight: bold;">REFERENCJE</span>
-                
-                <div class="pdf-container">
-                    <div>
-                      <canvas id="pdf-canvas-1"></canvas>
-                    </div>
-                    
-                    <div>
-                      <canvas id="pdf-canvas-2"></canvas>
-                    </div>
-                 </div>
+  <p class="mt-20">
+    Instalacje technologiczne, cieplne i przemysłowe.
+  </p>
 
-                 <script type="module">
-                    import { getDocument, GlobalWorkerOptions } from './pdfjs/build/pdf.mjs';
-                
-                    // Ustaw worker
-                    GlobalWorkerOptions.workerSrc = './pdfjs/build/pdf.worker.mjs';
-                
-                    // Funkcja renderująca PDF na danym canvasie
-                    function renderPDF(pdfUrl, canvasId) {
-                      const loadingTask = getDocument(pdfUrl);
-                      loadingTask.promise.then(pdf => {
-                        pdf.getPage(1).then(page => {
-                          const scale = 1.5;
-                          const viewport = page.getViewport({ scale });
-                
-                          const canvas = document.getElementById(canvasId);
-                          const context = canvas.getContext('2d');
-                          canvas.width = viewport.width;
-                          canvas.height = viewport.height;
-                
-                          page.render({ canvasContext: context, viewport });
-                        });
-                      }).catch(err => {
-                        console.error(`Błąd podczas ładowania ${pdfUrl}:`, err);
-                      });
-                    }
-                
-                    // Wywołanie dla dwóch plików PDF
-                    renderPDF('referencje/list_referencyjny_elektr_-_B.Jurczyński.pdf', 'pdf-canvas-1');
-                    renderPDF('referencje/Referencje_Introl-sig_K.Szotek.pdf', 'pdf-canvas-2');
-                </script>
-               
-        
-           <!--<object data="/referencje/list_referencyjny_elektr_-_B.Jurczyński.pdf#toolbar=0" type="application/pdf" width="600" height="500">
-                    <p>
-                        Nie udało się załadować PDF-a. <a href="/referencje/list_referencyjny_elektr_-_B.Jurczyński.pdf#toolbar=0">Kliknij tutaj, aby pobrać</a>.
-                    </p>
-                </object>
-                <object data="/referencje/Referencje Introl-sig K. Szotek.pdf#toolbar=0" type="application/pdf" width="595" height="842">
-                    <p>
-                        Nie udało się załadować PDF-a. <a href="/referencje/Referencje Introl-sig K. Szotek.pdf#toolbar=0">Kliknij tutaj, aby pobrać</a>.
-                    </p>
-                </object>-->
-            </p>
-        
-            <p>
-                <a href="https://buycoffee.to/noxxic" target="_blank">      
-                    <img src="https://buycoffee.to/img/share-button-primary.png" style="width: 351px; height: 92px" alt="Postaw mi kawę na buycoffee.to">     
-                </a>
-            </p>
-            <p>
-                <a href="https://buycoffee.to/noxxic" target="_blank">                 
-                    <img src="Kod_QR_buycoffee.png" style="width: 210px; height: 210px" alt="Postaw mi kawę na buycoffee.to">
-                </a>
-            </p>
-    </body>
+  <p>
+    Kogeneracja, silniki gazowe, turbiny parowe i gazowe, zakłady utylizacji odpadów, elektrociepłownie, pompownie.
+  </p>
+
+  <p>
+    Doradztwo techniczne, stadia wykonalności, analizy opłacalności, projektowanie, szkolenia.
+    <br />
+  </p>
+
+  <p><strong>REFERENCJE</strong></p>
+
+  <div class="pdf-container">
+    <div>
+      <canvas id="pdf-canvas-1"></canvas>
+    </div>
+
+    <div>
+      <canvas id="pdf-canvas-2"></canvas>
+    </div>
+  </div>
+
+  <script type="module">
+    import { getDocument, GlobalWorkerOptions } from './pdfjs/build/pdf.mjs';
+
+    GlobalWorkerOptions.workerSrc = './pdfjs/build/pdf.worker.mjs';
+
+    function renderPDF(pdfUrl, canvasId) {
+      const loadingTask = getDocument(pdfUrl);
+      loadingTask.promise.then(pdf => {
+        pdf.getPage(1).then(page => {
+          const scale = 1.5;
+          const viewport = page.getViewport({ scale });
+
+          const canvas = document.getElementById(canvasId);
+          const context = canvas.getContext('2d');
+          canvas.width = viewport.width;
+          canvas.height = viewport.height;
+
+          page.render({ canvasContext: context, viewport });
+        });
+      }).catch(err => {
+        console.error(`Błąd podczas ładowania ${pdfUrl}:`, err);
+      });
+    }
+
+    renderPDF('referencje/list_referencyjny_elektr_-_B.Jurczyński.pdf', 'pdf-canvas-1');
+    renderPDF('referencje/Referencje_Introl-sig_K.Szotek.pdf', 'pdf-canvas-2');
+  </script>
+
+  <p>
+    <a href="https://buycoffee.to/noxxic" target="_blank">
+      <img src="https://buycoffee.to/img/share-button-primary.png" style="width: 351px; height: 92px" alt="Postaw mi kawę na buycoffee.to" />
+    </a>
+  </p>
+
+  <p>
+    <a href="https://buycoffee.to/noxxic" target="_blank">
+      <img src="Kod_QR_buycoffee.png" style="width: 210px; height: 210px" alt="Postaw mi kawę na buycoffee.to" />
+    </a>
+  </p>
+</body>
 </html>

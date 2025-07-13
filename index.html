@@ -8,12 +8,23 @@
   <link href="https://db.onlinewebfonts.com/c/2ab02c2937018ee7f2ccc346929ccf57?family=ArtifaktElement-Regular" rel="stylesheet">
 
   <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      font-family: "ArtifaktElement-Regular", sans-serif;
-      text-align: center;
+    html, body {
+    margin: 0;
+    min-height: 100%;
+    height: auto;
+    font-family: "ArtifaktElement-Regular", sans-serif;
+    text-align: center;
+    background-attachment: scroll;
+    }
+    
+    html {
       background: linear-gradient(135deg, #d3d3d3 60%, #808080);
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    
+    body {
+      background: transparent;
     }
 
     canvas {

@@ -24,12 +24,18 @@
             margin: 0;      /* Remove default margin */
         }
     </style>
-
+    
     <style>
         body {
             text-align: center;
         }
 
+        canvas {
+          border: 1px solid #ccc;
+          display: block;
+          margin: 20px auto;
+        }
+        
         h1 {
             font-size: 100px;
         }
@@ -71,9 +77,13 @@
 
             <p>
                 <br></br>
-                Instalacje technologiczne, cieplne, przemysłowe, kogeneracja, turbiny parowe i gazowe, zakłady utylizacji odpadów, elektrociepłownie, pompownie.
+                Instalacje technologiczne, cieplne i przemysłowe.
             </p>
 
+            <p>
+                Kogeneracja, silniki gazowe, turbiny parowe i gazowe, zakłady utylizacji odpadów, elektrociepłownie, pompownie.
+            </p>
+        
             <p>
                 Doradztwo techniczne, stadia wykonalności, analizy opłacalności, projektowanie, szkolenia.
                 <br></br>
@@ -82,24 +92,51 @@
             <p>
                 <span style="font-weight: bold;">REFERENCJE</span>
                 <br></br>
-                <iframe 
-                  src="pdfjs/web/viewer.html?file=../referencje/list referencyjny elektr - B. Jurczyński.pdf&toolbar=0" 
-                  width="100%" 
-                  height="800px" 
-                  style="border: none;">
-                </iframe>
+                  <canvas id="pdf-canvas-1"></canvas>
+                  <canvas id="pdf-canvas-2"></canvas>
+
+                 <script type="module">
+                    import { getDocument, GlobalWorkerOptions } from './pdfjs/build/pdf.mjs';
+                
+                    // Ustaw worker
+                    GlobalWorkerOptions.workerSrc = './pdfjs/build/pdf.worker.mjs';
+                
+                    // Funkcja renderująca PDF na danym canvasie
+                    function renderPDF(pdfUrl, canvasId) {
+                      const loadingTask = getDocument(pdfUrl);
+                      loadingTask.promise.then(pdf => {
+                        pdf.getPage(1).then(page => {
+                          const scale = 1.5;
+                          const viewport = page.getViewport({ scale });
+                
+                          const canvas = document.getElementById(canvasId);
+                          const context = canvas.getContext('2d');
+                          canvas.width = viewport.width;
+                          canvas.height = viewport.height;
+                
+                          page.render({ canvasContext: context, viewport });
+                        });
+                      }).catch(err => {
+                        console.error(`Błąd podczas ładowania ${pdfUrl}:`, err);
+                      });
+                    }
+                
+                    // Wywołanie dla dwóch plików PDF
+                    renderPDF('referencje/list_referencyjny_elektr_-_B.Jurczyński.pdf', 'pdf-canvas-1');
+                    renderPDF('referencje/Referencje_Introl-sig_K.Szotek.pdf', 'pdf-canvas-2');
+                </script>
                
         
-        <!-- <object data="/referencje/list referencyjny elektr - B. Jurczyński.pdf" type="application/pdf" width="600" height="500">
+           <!--<object data="/referencje/list_referencyjny_elektr_-_B.Jurczyński.pdf#toolbar=0" type="application/pdf" width="600" height="500">
                     <p>
-                        Nie udało się załadować PDF-a. <a href="/referencje/list referencyjny elektr - B. Jurczyński.pdf">Kliknij tutaj, aby pobrać</a>.
+                        Nie udało się załadować PDF-a. <a href="/referencje/list_referencyjny_elektr_-_B.Jurczyński.pdf#toolbar=0">Kliknij tutaj, aby pobrać</a>.
                     </p>
                 </object>
-                <object data="/referencje/Referencje Introl-sig K. Szotek.pdf" type="application/pdf" width="600" height="500">
+                <object data="/referencje/Referencje Introl-sig K. Szotek.pdf#toolbar=0" type="application/pdf" width="595" height="842">
                     <p>
-                        Nie udało się załadować PDF-a. <a href="/referencje/Referencje Introl-sig K. Szotek.pdf">Kliknij tutaj, aby pobrać</a>.
+                        Nie udało się załadować PDF-a. <a href="/referencje/Referencje Introl-sig K. Szotek.pdf#toolbar=0">Kliknij tutaj, aby pobrać</a>.
                     </p>
-                </object> -->
+                </object>-->
             </p>
         
             <p>

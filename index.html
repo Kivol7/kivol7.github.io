@@ -94,39 +94,30 @@
                 <br></br>
                   <canvas id="pdf-canvas"></canvas>
 
-                  <!-- PDF.js -->
-                  <script src="pdfjs/build/pdf.mjs"></script>
-                  <script>
-                    const url = 'referencje/list_referencyjny_elektr_-_B.Jurczyński.pdf'; // ścieżka do PDF
+                 <script type="module">
+                    import { getDocument, GlobalWorkerOptions } from './pdfjs/build/pdf.mjs';
                 
-                    // Ustawienie ścieżki do pdf.worker.js
-                    pdfjsLib.GlobalWorkerOptions.workerSrc = 'pdfjs/build/pdf.worker.mjs';
+                    GlobalWorkerOptions.workerSrc = './pdfjs/build/pdf.worker.mjs';
                 
-                    // Załaduj PDF
-                    const loadingTask = pdfjsLib.getDocument(url);
-                    loadingTask.promise.then(function(pdf) {
-                      // Załaduj pierwszą stronę
-                      pdf.getPage(1).then(function(page) {
+                    const url = 'referencje/list_referencyjny_elektr_-_B.Jurczyński.pdf';
+                
+                    const loadingTask = getDocument(url);
+                    loadingTask.promise.then(pdf => {
+                      pdf.getPage(1).then(page => {
                         const scale = 1.5;
-                        const viewport = page.getViewport({ scale: scale });
+                        const viewport = page.getViewport({ scale });
                 
-                        // Przygotuj canvas
                         const canvas = document.getElementById('pdf-canvas');
                         const context = canvas.getContext('2d');
-                        canvas.height = viewport.height;
                         canvas.width = viewport.width;
+                        canvas.height = viewport.height;
                 
-                        // Renderuj stronę
-                        const renderContext = {
-                          canvasContext: context,
-                          viewport: viewport
-                        };
-                        page.render(renderContext);
+                        page.render({ canvasContext: context, viewport });
                       });
-                    }, function(error) {
-                      console.error('Błąd ładowania PDF: ' + error);
+                    }).catch(error => {
+                      console.error('Błąd ładowania PDF:', error);
                     });
-                  </script>
+                </script>
                
         
            <!--<object data="/referencje/list_referencyjny_elektr_-_B.Jurczyński.pdf#toolbar=0" type="application/pdf" width="600" height="500">

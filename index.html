@@ -92,8 +92,16 @@
             <p>
                 <span style="font-weight: bold;">REFERENCJE</span>
                 <br></br>
-                  <canvas id="pdf-canvas-1"></canvas>
-                  <canvas id="pdf-canvas-2"></canvas>
+                <div class="pdf-container">
+                    <div>
+                      <canvas id="pdf-canvas-1"></canvas>
+                      <p style="text-align: center;">PDF 1</p>
+                    </div>
+                    <div>
+                      <canvas id="pdf-canvas-2"></canvas>
+                      <p style="text-align: center;">PDF 2</p>
+                    </div>
+                 </div>
 
                  <script type="module">
                     import { getDocument, GlobalWorkerOptions } from './pdfjs/build/pdf.mjs';

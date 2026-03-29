@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Bartosz Jurczyński Noxxic</title>
 
+  <meta name="description" content="Instalacje przemysłowe, kogeneracja, doradztwo techniczne – Noxxic Bartosz Jurczyński" />
+
   <link href="https://db.onlinewebfonts.com/c/2ab02c2937018ee7f2ccc346929ccf57?family=ArtifaktElement-Regular" rel="stylesheet" />
 
   <style>
@@ -14,9 +16,12 @@
       font-family: "ArtifaktElement-Regular", sans-serif;
       text-align: center;
       background: linear-gradient(135deg, #d3d3d3 60%, #808080);
-      background-attachment: scroll;
       background-repeat: no-repeat;
       background-size: cover;
+    }
+
+    body {
+      padding-bottom: 40px;
     }
 
     h1 {
@@ -24,17 +29,23 @@
       margin-top: 30px;
     }
 
+    p {
+      margin: 8px 0;
+    }
+
     canvas {
       border: 1px solid #ccc;
       display: block;
-      margin: 20px auto;
+      margin: 0 auto;
+      max-width: 95%;
+      height: auto;
     }
 
     .pdf-container {
       display: flex;
-      gap: 20px;
-      justify-content: center;
-      align-items: flex-start;
+      flex-direction: column;
+      gap: 30px;
+      align-items: center;
       margin-top: 30px;
     }
 
@@ -42,18 +53,13 @@
       margin-top: 30px;
     }
 
-    /* RESPONSYWNOŚĆ */
     @media (max-width: 600px) {
       h1 {
-        font-size: 40px; /* mniejszy nagłówek na telefonie */
+        font-size: 40px;
       }
-      .pdf-container {
-        flex-direction: column; /* ustawienie kolumnowe na małych ekranach */
-        gap: 10px;
-        align-items: center; /* wycentrowanie PDFów */
-      }
+
       canvas {
-        width: 90vw; /* canvasy dopasowane szerokością do ekranu */
+        width: 90vw;
         height: auto;
       }
     }
@@ -71,24 +77,16 @@
   <p>+48 792 867 357</p>
 
   <p>
-    <script language="JavaScript" type="text/javascript">
-      var part1 = "biuro";
-      var part2 = Math.pow(2, 6);
-      var part3 = String.fromCharCode(part2);
-      var part4 = "noxxic.pl";
-      var part5 = part1 + String.fromCharCode(part2) + part4;
-      document.write("<a href=" + "mai" + "lto" + ":" + part5 + ">" + part1 + part3 + part4 + "</a>");
+    <script>
+      const email1 = ["biuro", "@", "noxxic.pl"].join("");
+      document.write("<a href='mailto:" + email1 + "'>" + email1 + "</a>");
     </script>
   </p>
 
   <p>
-    <script language="JavaScript" type="text/javascript">
-      var part1 = "b.jurczynski";
-      var part2 = Math.pow(2, 6);
-      var part3 = String.fromCharCode(part2);
-      var part4 = "noxxic.pl";
-      var part5 = part1 + String.fromCharCode(part2) + part4;
-      document.write("<a href=" + "mai" + "lto" + ":" + part5 + ">" + part1 + part3 + part4 + "</a>");
+    <script>
+      const email2 = ["b.jurczynski", "@", "noxxic.pl"].join("");
+      document.write("<a href='mailto:" + email2 + "'>" + email2 + "</a>");
     </script>
   </p>
 
@@ -102,39 +100,33 @@
 
   <p>
     Doradztwo techniczne, stadia wykonalności, analizy opłacalności, projektowanie, szkolenia.
-    <br />
   </p>
 
   <p class="mt-30"><strong>REFERENCJE</strong></p>
 
   <div class="pdf-container">
-    <div>
-      <canvas id="pdf-canvas-1"></canvas>
-    </div>
-
-    <div>
-      <canvas id="pdf-canvas-2"></canvas>
-    </div>
-
-    <div>
-      <canvas id="pdf-canvas-3"></canvas>
-    </div>
+    <canvas id="pdf-canvas-1"></canvas>
+    <canvas id="pdf-canvas-2"></canvas>
+    <canvas id="pdf-canvas-3"></canvas>
   </div>
 
   <script type="module">
-    import { getDocument, GlobalWorkerOptions } from './pdfjs/build/pdf.mjs';
+    import * as pdfjsLib from "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.min.mjs";
 
-    GlobalWorkerOptions.workerSrc = './pdfjs/build/pdf.worker.mjs';
+    pdfjsLib.GlobalWorkerOptions.workerSrc =
+      "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.worker.min.mjs";
 
     function renderPDF(pdfUrl, canvasId) {
-      const loadingTask = getDocument(pdfUrl);
+      const loadingTask = pdfjsLib.getDocument(pdfUrl);
+
       loadingTask.promise.then(pdf => {
         pdf.getPage(1).then(page => {
-          const scale = 1.5;
+          const scale = window.innerWidth < 600 ? 1 : 1.5;
           const viewport = page.getViewport({ scale });
 
           const canvas = document.getElementById(canvasId);
           const context = canvas.getContext('2d');
+
           canvas.width = viewport.width;
           canvas.height = viewport.height;
 
@@ -142,6 +134,8 @@
         });
       }).catch(err => {
         console.error(`Błąd podczas ładowania ${pdfUrl}:`, err);
+        const canvas = document.getElementById(canvasId);
+        canvas.outerHTML = "<p>Nie udało się załadować PDF.</p>";
       });
     }
 
@@ -150,16 +144,17 @@
     renderPDF('referencje/Referencje_Noxxic_Laziska_2025_08_.pdf', 'pdf-canvas-3');
   </script>
 
-  <p>
-    <a href="https://buycoffee.to/noxxic" target="_blank">
-      <img src="https://buycoffee.to/img/share-button-primary.png" style="width: 351px; height: 92px" alt="Postaw mi kawę na buycoffee.to" />
+  <p class="mt-30">
+    <a href="https://buycoffee.to/noxxic" target="_blank" rel="noopener noreferrer">
+      <img src="https://buycoffee.to/img/share-button-primary.png" style="width: 351px; height: 92px" alt="Postaw mi kawę" />
     </a>
   </p>
 
   <p>
-    <a href="https://buycoffee.to/noxxic" target="_blank">
-      <img src="Kod_QR_buycoffee.png" style="width: 210px; height: 210px" alt="Postaw mi kawę na buycoffee.to" />
+    <a href="https://buycoffee.to/noxxic" target="_blank" rel="noopener noreferrer">
+      <img src="Kod_QR_buycoffee.png" style="width: 210px; height: 210px" alt="Kod QR" />
     </a>
   </p>
+
 </body>
 </html>
